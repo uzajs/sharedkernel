@@ -1,11 +1,12 @@
 import { Entity } from "../../src/model/entity";
+import { Guid } from "guid-typescript";
 
-export class TestCar extends Entity<number> {
+export class TestProduct extends Entity<Guid> {
     name: string;
 
-    constructor(id: number, name: string) {
+    constructor(name: string) {
         super();
-        this.id = id;
+        this.id = Guid.create();
         this.name = name;
     }
 
@@ -13,4 +14,3 @@ export class TestCar extends Entity<number> {
         return `${this.name} [${this.id}]`;
     }
 }
-

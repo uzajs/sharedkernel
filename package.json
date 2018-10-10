@@ -1,7 +1,7 @@
 {
   "name": "uzajs-sharedkernel",
   "version": "0.1.0",
-  "description": "shared kernel",
+  "description": "Uza.js SharedKernel",
   "scripts": {
     "test": "jest --forceExit --coverage --verbose",
     "watch-test": "npm run test -- --watchAll"
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/uzajs/sharedkernel#readme",
   "dependencies": {
+    "guid-typescript": "^1.0.7",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
