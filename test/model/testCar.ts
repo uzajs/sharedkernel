@@ -1,4 +1,4 @@
-import { Entity } from "../../../src/core/model/entity";
+import { Entity } from "../../src/model/entity";
 
 export class TestCar extends Entity<number> {
     name: string;
