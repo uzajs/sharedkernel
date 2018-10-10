@@ -1,6 +1,6 @@
 {
   "name": "uzajs-sharedkernel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Uza.js SharedKernel",
   "scripts": {
     "test": "jest --forceExit --coverage --verbose",
