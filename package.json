@@ -1,0 +1,33 @@
+{
+  "name": "uzajs-sharedkernel",
+  "version": "0.1.0",
+  "description": "shared kernel",
+  "scripts": {
+    "test": "jest --forceExit --coverage --verbose",
+    "watch-test": "npm run test -- --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uzajs/sharedkernel.git"
+  },
+  "author": "Koske Kimutai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uzajs/sharedkernel/issues"
+  },
+  "homepage": "https://github.com/uzajs/sharedkernel#readme",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.5",
+    "@types/lodash": "^4.14.117",
+    "@types/node": "^10.11.6",
+    "chai": "^4.2.0",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.2"
+  }
+}

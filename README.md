@@ -1,2 +1,2 @@
-# sharedkernel
-shared kernel
+# Uza.js SharedKernel
+shared kernel for Uza.js
