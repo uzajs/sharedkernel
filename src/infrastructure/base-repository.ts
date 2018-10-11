@@ -1,15 +1,23 @@
 import { IRepository } from "../interfaces/irepository";
 import { Entity } from "../model/entity";
-import * as r from "rethinkdb";
-import { Connection } from "rethinkdb";
-
+import Sequelize from "sequelize";
 
 export abstract class BaseRepository<T extends Entity<TId>, TId> implements IRepository<T, TId> {
 
-    connection: Connection;
+
+    db = "expressapp";
+    username = "root";
+    password = "root";
     entities: Array<T>;
 
+    connection = new Sequelize(this.db, this.username, this.password, {
+        dialect: "sqlite",
+        storage: "uza.sqlite",
+        operatorsAliases: false
+    });
+
     constructor() {
+        this.connnectDb();
         this.entities = [];
     }
 
@@ -33,9 +41,10 @@ export abstract class BaseRepository<T extends Entity<TId>, TId> implements IRep
     }
 
     connnectDb(): void {
-        r.connect({host: "127.0.0.1", port: 28015}, (err, conn) => {
-            if (err) throw err;
-            this.connection = conn;
+        this.connection.authenticate().then(() => {
+            console.log("connection successful");
+        }).catch(reason => {
+            console.error("Connection FAILED", reason);
         });
     }
 }
