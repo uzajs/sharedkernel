@@ -10,10 +10,10 @@ export abstract class RepositoryBase<T extends EntityBase> implements IRepositor
     }
 
     create(entity: T): Promise<T> {
-        return getManager().save(entity);
+        return this.connection.manager.save(entity);
     }
 
     createBatch(entities: Array<T>): Promise<Array<T>> {
-        return getManager().save(entities);
+        return this.connection.manager.save(entities);
     }
 }
