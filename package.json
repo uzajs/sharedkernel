@@ -19,7 +19,6 @@
   "dependencies": {
     "lodash": "^4.17.11",
     "reflect-metadata": "^0.1.12",
-    "sequelize": "^4.39.0",
     "sqlite3": "^4.0.2",
     "typeorm": "^0.2.7",
     "uuid": "^3.3.2"
