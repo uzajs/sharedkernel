@@ -23,7 +23,7 @@ describe("RepositoryBase", () => {
             entities: ["test/core/model/*.ts"],
             synchronize: true
         });
-        repository = new TestCarRepository(connection);
+        repository = new TestCarRepository(TestProduct, connection);
         await repository.createBatch(TestProduct.getTestProducts(5));
     });
 

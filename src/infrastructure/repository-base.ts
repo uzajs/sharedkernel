@@ -1,11 +1,16 @@
+import "reflect-metadata";
 import { EntityBase } from "../core/model/entity-base";
 import { Connection } from "typeorm";
 import { IRepositoryBase } from "../core/interfaces/irepository-base";
 
+export type ObjectType<T> = { new (): T } | Function;
+
 export abstract class RepositoryBase<T extends EntityBase> implements IRepositoryBase<T> {
+    private type: ObjectType<T>;
     connection: Connection;
 
-    constructor(connection: Connection) {
+    constructor(type: ObjectType<T>, connection: Connection) {
+        this.type = type;
         this.connection = connection;
     }
 
@@ -18,6 +23,6 @@ export abstract class RepositoryBase<T extends EntityBase> implements IRepositor
     }
 
     getAll(): Promise<Array<T>> {
-        return undefined;
+        return this.connection.manager.find(this.type);
     }
 }
