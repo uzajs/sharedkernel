@@ -24,6 +24,7 @@ describe("RepositoryBase", () => {
             synchronize: true
         });
         repository = new TestCarRepository(connection);
+        await repository.createBatch(TestProduct.getTestProducts(5));
     });
 
     test("should create entity", async () => {
@@ -35,6 +36,12 @@ describe("RepositoryBase", () => {
     test("should create batch entities", async () => {
         const testProducts = await repository.createBatch(TestProduct.getTestProducts(2));
         expect(testProducts.length === 2);
+        testProducts.forEach((p: TestProduct) => console.log(`${p}`));
+    });
+
+    test("should read  entities", async () => {
+        const testProducts = await repository.getAll();
+        expect(testProducts.length > 0);
         testProducts.forEach((p: TestProduct) => console.log(`${p}`));
     });
 });

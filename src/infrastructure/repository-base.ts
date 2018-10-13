@@ -1,5 +1,5 @@
 import { EntityBase } from "../core/model/entity-base";
-import { Connection, getManager } from "typeorm";
+import { Connection } from "typeorm";
 import { IRepositoryBase } from "../core/interfaces/irepository-base";
 
 export abstract class RepositoryBase<T extends EntityBase> implements IRepositoryBase<T> {
@@ -15,5 +15,9 @@ export abstract class RepositoryBase<T extends EntityBase> implements IRepositor
 
     createBatch(entities: Array<T>): Promise<Array<T>> {
         return this.connection.manager.save(entities);
+    }
+
+    getAll(): Promise<Array<T>> {
+        return undefined;
     }
 }
