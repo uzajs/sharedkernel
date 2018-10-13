@@ -1,32 +1,40 @@
-import { TestCarRepository } from "./test-car.repository";
-import { TestCar } from "../model/testCar";
+import { TestCarRepository } from "./test-car-repository";
+import { TestProduct } from "../core/model/test-product";
+import { createConnection } from "typeorm";
+import * as fs from "fs";
 
-describe("BaseRepository", () => {
-    const rep = new TestCarRepository();
-    rep.create(new TestCar(11, "Nissan"));
+describe("RepositoryBase", () => {
 
-    it("should find item", () => {
-        const car = rep.get(11);
-        expect(car).not.toBeNull();
-        console.log(`${car}`);
+    const dbPath: string = "test/uzatest.sqlite3";
+    let repository: TestCarRepository;
+    beforeAll(async () => {
+        fs.unlink(dbPath, (err) => {
+                if (err) {
+                    console.log(err);
+                    throw err;
+                }
+                console.log("db deleted !");
+            }
+        );
+        const connection = await createConnection({
+            logging: true,
+            type: "sqlite",
+            database: dbPath,
+            entities: ["test/core/model/*.ts"],
+            synchronize: true
+        });
+        repository = new TestCarRepository(connection);
     });
 
-    it("should load item list", () => {
-        const cars = rep.getAll();
-        expect(cars.length > 0);
-        cars.forEach(x => console.log(`${x}`));
+    test("should create entity", async () => {
+        const testProduct = await repository.create(new TestProduct("Mazda"));
+        expect(testProduct).not.toBeUndefined();
+        console.log(`${testProduct}`);
     });
 
-    it("should add item", () => {
-        rep.create(new TestCar(22, "Isuzu"));
-        const cars = rep.getAll();
-        expect(cars.length === 2);
-        cars.forEach(x => console.log(`${x}`));
-    });
-
-    it("should remove item", () => {
-        rep.remove(11);
-        const deletedCar = rep.get(11);
-        expect(deletedCar).toBeUndefined();
+    test("should create batch entities", async () => {
+        const testProducts = await repository.createBatch(TestProduct.getTestProducts(2));
+        expect(testProducts.length === 2);
+        testProducts.forEach((p: TestProduct) => console.log(`${p}`));
     });
 });
